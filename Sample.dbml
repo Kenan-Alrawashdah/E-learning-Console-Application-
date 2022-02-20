@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="UniversityDB" Class="SampleDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=SCS\SQLEXPRESS;Initial Catalog=UniversityDB;Integrated Security=True;Pooling=False" SettingsObjectName="FinalProjectOOP.Properties.Settings" SettingsPropertyName="UniversityDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Course" Member="Courses">
+    <Type Name="Course">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Course_Score" Member="Scores" ThisKey="id" OtherKey="couID" Type="Score" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Score" Member="Scores">
+    <Type Name="Score">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="mark" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="stdID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="couID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Course_Score" Member="Course" ThisKey="couID" OtherKey="id" Type="Course" IsForeignKey="true" />
+      <Association Name="Student_Score" Member="Student" ThisKey="stdID" OtherKey="id" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Student" Member="Students">
+    <Type Name="Student">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fName" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="lName" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="major" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Student_Score" Member="Scores" ThisKey="id" OtherKey="stdID" Type="Score" />
+    </Type>
+  </Table>
+</Database>
